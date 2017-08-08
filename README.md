@@ -36,26 +36,26 @@ to consume packages, run:
 | `-p` | Map a port in the docker container to a port on the localhost, for example, `-p 8080:80` maps port 8080 on the host to port 80 on the docker container. Allows the container to communicate with the outside world. |
 | `-v` | Mount a specified host directory into the container, enabling the container to share files in this directory with the host. This creates a location to upload packages and allows for repo updates without restarting the container. |
 
-***BUILDING FROM SOURCE***
+## BUILDING FROM SOURCE
 
 clone repo into a directory, cd into the directory, and run the command below, which will build a docker container from source
 
-- docker build -t debserve
+`docker build -t debserve .`
 
-the -t flag tags the docker container with a name by which it can be run, in this case the container is named "debserve"
+the `-t` flag tags the docker container with a name by which it can be run, in this case the container is named "debserve"
 
-***Troubleshooting***
+## Troubleshooting
 
 Should there be an unknown failure within this container the command below can be used to show the output a container is generating when it is not run interactively
-- sudo docker logs --tail 50 --follow --timestamps $CONTAINER_ID
+`sudo docker logs --tail 50 --follow --timestamps $CONTAINER_ID`
 
 If necessary, the command below can be used to open a shell inside the container
-- sudo docker exec -i -t $CONTAINER_ID /bin/bash
+`sudo docker exec -i -t $CONTAINER_ID /bin/bash`
 
-***NOTE***
+## NOTE
 
 Anyone who wishes to consume a signed repo must first pull the public key, either manually or via a keyserver
 
-- notes on gpg key creation: https://www.gnupg.org/gph/en/manual/c14.html
+- [Gnupg](https://www.gnupg.org/gph/en/manual/c14.html) - Notes on gpg key creation
 
-- notes on obtaining gpg public key: https://askubuntu.com/questions/36507/how-do-i-import-a-public-key
+- [import-a-public-key](https://askubuntu.com/questions/36507/how-do-i-import-a-public-key) - Notes on obtaining gpg public key
