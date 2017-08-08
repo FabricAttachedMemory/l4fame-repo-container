@@ -59,3 +59,12 @@ Anyone who wishes to consume a signed repo must first pull the public key, eithe
 - [Gnupg](https://www.gnupg.org/gph/en/manual/c14.html) - Notes on gpg key creation
 
 - [import-a-public-key](https://askubuntu.com/questions/36507/how-do-i-import-a-public-key) - Notes on obtaining gpg public key
+
+## External Links
+
+* [debserve](https://hub.docker.com/r/davidpatawaran/debserve/) - Dockerhub image for debserve
+* [l4fame-build-container](https://hub.docker.com/r/austinhpe/l4fame-build-container/) - Dockerhub image for the build container
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
