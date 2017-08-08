@@ -1,32 +1,33 @@
 # debserve
 Debian-based repository creation and hosting via Aptly and Apache
 
-***OVERVIEW***
-
+## OVERVIEW
 Container which builds, hosts, and optionally signs a public repository from a directory of .deb packages and updates this repository when changes are made to the .deb directory
 
-***Dockerhub:***
-https://hub.docker.com/r/davidpatawaran/debserve/
+[**Dockerhub Image**](https://hub.docker.com/r/davidpatawaran/debserve/)
 
-***USAGE***
+## USAGE
 
-The command below will run the container, creating a repository consisting of all packages in the ~/test-debs directory and hosted at localhost:4000 (note: the internal container script points at the /debs directory, so the -v flag syntax should be $HOSTDIR:/debs)
+The command below will run the container, creating a repository consisting of all packages in the `~/test-debs` directory and hosted at `localhost:4000`
+(note: the internal container script points at the `/debs` directory, so the `-v` flag syntax should be `$HOSTDIR:/debs`)
 
-- docker run -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve
+`docker run -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve`
 
-optionally run with the additional flags shown below, which will sign the repo with gpg key matching the ID 1234EXAMPLE with passphrase "pass", which should be found in the host directory ~/.gnupg (note: -v flag syntax should be $HOSTGPGDIR:/.gnupg)
+optionally run with the additional flags shown below, which will sign the repo with gpg key matching the ID 1234EXAMPLE with passphrase "pass", which should be found in the host directory `~/.gnupg`
+(note: `-v` flag syntax should be `$HOSTGPGDIR:/.gnupg`)
 
-- docker run -e GPG_ID=1234EXAMPLE -e GPG_PASS=pass -p 4000:80 -v ~/test-debs:/debs -v ~/.gnupg:/.gnupg davidpatawaran/debserve
+`docker run -e GPG_ID=1234EXAMPLE -e GPG_PASS=pass -p 4000:80 -v ~/test-debs:/debs -v ~/.gnupg:/.gnupg davidpatawaran/debserve`
 
-In order to give the repo a custom name, distribution, and/or component, pass the docker run command -e flags with the desired variable values. The command below will create a repo named "example", holding the distribution "stable" and component "contrib" without these flags the repo defaults to name:debserve distribtion:testing component:main
+In order to give the repo a custom name, distribution, and/or component, pass the docker run command `-e` flags with the desired variable values. The command below will create a repo named "example", holding the distribution "stable" and component "contrib" without these flags the repo defaults to name:debserve distribtion:testing component:main
 
-- docker run -e REPO_NAME=example -e DISTRIBUTION=stable -e COMPONENT=contrib -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve
+`docker run -e REPO_NAME=example -e DISTRIBUTION=stable -e COMPONENT=contrib -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve`
 
-run with --name $NAME to name the container, and --restart always to have the container restart whenever it exits
+run with `--name $NAME` to name the container, and `--restart always` to have the container restart whenever it exits
 
-to consume packages, add 'deb http://$HOSTIP:$PORT/ $DISTRIBUTION $COMPONENT' to /etc/apt/sources.list and apt-get update
+to consume packages, run:
+`echo "deb http://$HOSTIP:$PORT/ $DISTRIBUTION $COMPONENT" >> /etc/apt/sources.list && apt-get update`
 
-***Docker run flags***
+## Docker run flags
 
 - The -d flag (detached) runs the container in the background and prints the container's ID
 
