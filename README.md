@@ -10,18 +10,18 @@ The command below will run the container, creating a repository consisting of al
 (note: the internal container script points at the `/debs` directory, so the `-v` flag syntax should be `$HOSTDIR:/debs`)
 
 `docker run -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve`
-<br>
+<br><br>
 
 Optionally run with the additional flags shown below, which will sign the repo with gpg key matching the ID 1234EXAMPLE with passphrase "pass", which should be found in the host directory `~/.gnupg`
 (note: `-v` flag syntax should be `$HOSTGPGDIR:/.gnupg`)
 
 `docker run -e GPG_ID=1234EXAMPLE -e GPG_PASS=pass -p 4000:80 -v ~/test-debs:/debs -v ~/.gnupg:/.gnupg davidpatawaran/debserve`
-<br>
+<br><br>
 
-In order to give the repo a custom name, distribution, and/or component, pass the docker run command `-e` flags with the desired variable values. The command below will create a repo named "example", holding the distribution "stable" and component "contrib" without these flags the repo defaults to name:debserve distribtion:testing component:main
+In order to give the repo a custom name, distribution, and/or component, pass the docker run command `-e` flags with the desired variable values. The command below will create a repo named "example", holding the distribution "stable" and component "contrib" without these flags the repo defaults to name:debserve distribution:testing component:main
 
 `docker run -e REPO_NAME=example -e DISTRIBUTION=stable -e COMPONENT=contrib -p 4000:80 -v ~/test-debs:/debs davidpatawaran/debserve`
-<br>
+<br><br>
 
 Run with `--name $NAME` to name the container, and `--restart always` to have the container restart whenever it exits
 
@@ -63,7 +63,7 @@ Anyone who wishes to consume a signed repo must first pull the public key, eithe
 ## External Links
 
 * [debserve](https://hub.docker.com/r/davidpatawaran/debserve/) - Dockerhub image for debserve
-* [l4fame-build-container](https://hub.docker.com/r/austinhpe/l4fame-build-container/) - Dockerhub image for the build container
+* [l4fame-build-container](https://github.com/FabricAttachedMemory/l4fame-build-container) - GitHub repository for l4fame-build-container
 
 ## License
 
