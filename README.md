@@ -29,13 +29,12 @@ to consume packages, run:
 
 ## Docker run flags
 
-- The -d flag (detached) runs the container in the background and prints the container's ID
-
-- The -e flag passes an environmental variable to the Docker container, to be used within the script.
-
-- The -p flag maps a port in the docker container to a port on the localhost, for example, -p 8080:80 maps port 8080 on the host to port 80 on the docker container. Allows the container to communicate with the outside world.
-
-- The -v flag mounts a specified host directory into the container, enabling the container to share files in this directory with the host. This creates a location to upload packages and allows for repo updates without restarting the container.
+| Docker Flag | Explanation |
+| ----------- | ----------- |
+| `-d` | Runs the container in the background and prints the container's ID (detached mode). |
+| `-e` | Pass an environmental variable to the Docker container, to be used within the script. |
+| `-p` | Map a port in the docker container to a port on the localhost, for example, `-p 8080:80` maps port 8080 on the host to port 80 on the docker container. Allows the container to communicate with the outside world. |
+| `-v` | Mount a specified host directory into the container, enabling the container to share files in this directory with the host. This creates a location to upload packages and allows for repo updates without restarting the container. |
 
 ***BUILDING FROM SOURCE***
 
