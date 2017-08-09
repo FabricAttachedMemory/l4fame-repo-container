@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 function main {
     init_script
     error_check
@@ -91,7 +79,7 @@ function update_repo {
     done
 }
 
-# initializes script with necessary variables and starts Apache
+# initializes script with necessary variables and starts server
 # also keeps track of the number of times the container restarts
 # drops any pre-existing repos in case the container has restarted
 function init_script {
@@ -101,8 +89,14 @@ function init_script {
     RESTARTS=$((RESTARTS+1))
     echo $RESTARTS > restarts.txt
     START_TIME=`date`
-    /usr/sbin/apache2ctl start
+    init_server
     drop_repo
+}
+
+# initializes desired server, currently using NGINX
+function init_server {
+    sed -i '/server {/ a   autoindex on;' /etc/nginx/sites-available/default
+    /etc/init.d/nginx start
 }
 
 # looks for issues with keys and packages
