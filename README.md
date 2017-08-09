@@ -1,5 +1,5 @@
 # debserve
-Debian-based repository creation and hosting via Aptly and Apache
+Lightweight Debian-based repository creation and hosting via Aptly and NGINX
 
 ***OVERVIEW***
 
