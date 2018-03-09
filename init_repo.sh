@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+
 function main {
     init_script
     error_check
@@ -112,14 +114,17 @@ function error_check {
 
 # generates repo and container status for debugging purposes
 function generate_status {
-    echo "Last Started:" $START_TIME > status.txt
-    echo "Restarted:" $((RESTARTS-1)) "times" >> status.txt
-    echo `ls -l debs | wc -l` "packages uploaded" >> status.txt
-    echo "" >> status.txt
-    echo "Packages included in this repo:" >> status.txt
-    echo `ls -1 debs` >> status.txt
+    cat > /var/www/html/status.txt << EOSTATUS
+Started: $START_TIME
+Restarted: $((RESTARTS-1)) times
 
-    cp status.txt /var/www/html/.
+`ls -1 debs | wc -l` packages uploaded:
+`ls -1 debs`
+
+Environment @ build time:
+`env | sort`
+
+EOSTATUS
 }
 
 main "$@"
